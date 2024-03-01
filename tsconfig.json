@@ -22,6 +22,9 @@
       "@utils/*": [
         "./src/shared/utils/*"
       ],
+      "@components/*": [
+        "./src/shared/components/*"
+      ],
       "@models/*": [
         "./src/models/*"
       ],

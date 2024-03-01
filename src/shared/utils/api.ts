@@ -170,7 +170,7 @@ export const postData = async <T extends DataResponse>(url: string, body: any): 
     const res: Response = await fetch(`${API_URL}${url}`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        Accept: 'application/json'
       },
       body: JSON.stringify(body)
     })
@@ -250,7 +250,6 @@ export const postDataTokenFormData = async <T extends DataResponse>(
   const res: Response = await fetch(`${API_URL}${url}`, {
     method: 'POST',
     headers: {
-      Accept: 'application/json',
       Authorization: `Bearer ${tokenSession}`
     },
     body: form_data
