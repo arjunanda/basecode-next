@@ -2,7 +2,7 @@ import { ResponseUseCase } from "@models/api-response.models"
 import { LoginResponse } from "../models/login-response.model"
 import { LoginRepository } from "../repositories/login.repository"
 import { LoginRequest } from "../models/login-request.model"
-import { getSessionStorage, setSessionStorage } from "@utils/storage"
+import { getSessionStorage, removeAllSessionStorage, setSessionStorage } from "@utils/storage"
 import { LocalStorageConfig } from "@/shared/configs/defaultConfig"
 
 export const LoginCase = async (data: LoginRequest): Promise<ResponseUseCase<LoginResponse>> => {
@@ -41,4 +41,11 @@ export const CheckLoginCase = () : LoginResponse | null =>  {
   }
 
   return null
+}
+
+export const LogoutCase = () : boolean =>  {
+
+  removeAllSessionStorage()
+
+  return true
 }
