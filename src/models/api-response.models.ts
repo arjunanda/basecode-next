@@ -11,12 +11,16 @@ export interface CoreResponseApi {
 //   };
 
   export interface paginate<T> {
-    rows?: T;
+    data?: T;
     limit: number;
-    page: number;
+    to: number,
+    from: number,
+    current_page: number;
     sort: string;
-    total_rows: number;
-    total_pages: number;
+    per_page: number;
+    total: number;
+    first_page: number;
+    last_page: number;
     FilterValue: Array<any> | null;
   }
   

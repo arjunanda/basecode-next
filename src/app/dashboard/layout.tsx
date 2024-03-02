@@ -1,3 +1,5 @@
+
+import NavbarComponent from '@/shared/components/navbar'
 import { AuthProvider } from '@/shared/context/auth/AuthContext'
 import React, { ReactNode } from 'react'
 
@@ -8,7 +10,15 @@ type Props = {
 const LayoutDashboard = (props: Props) => {
   return (
     <AuthProvider>
-        <div className='h-[100vh] w-full p-5 bg-slate-200'>{props.children}</div>
+        <div className='min-h-[100vh] w-full bg-gray-700'>
+            <div>
+                <NavbarComponent />
+            </div>
+            
+            <div className='p-5'>
+                {props.children}
+            </div>
+        </div>
     </AuthProvider>
   )
 }

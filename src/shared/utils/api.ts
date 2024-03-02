@@ -41,6 +41,7 @@ export const getDataWithToken = async <T extends DataResponse>(url: string): Pro
         'Content-Type': 'application/json',
         Authorization: `Bearer ${tokenSession}`
       },
+      cache: 'no-store',
     })
     const resJson: HttpResponse<T> = await res.json()
 
@@ -231,7 +232,10 @@ export const postDataTokenFormData = async <T extends DataResponse>(
   for (const key in body) {
     if (typeof body[key] === 'object') {
       if (body[key] instanceof File) {
-        form_data.append(key, body[key])
+        if (body[key].name !== "") {
+
+          form_data.append(key, body[key])
+        }
       } else {
         if (body[key] !== null) {
           for (let i = 0; i < body[key].length; i++) {
@@ -267,18 +271,19 @@ export const putDataTokenFormData = async <T extends DataResponse>(
 
   const form_data = new FormData()
 
+  console.log(body)
+
   for (const key in body) {
     if (typeof body[key] === 'object') {
       if (body[key] instanceof File) {
-        form_data.append(key, body[key])
-      } else {
-        if (body[key] !== null) {
-          for (let i = 0; i < body[key].length; i++) {
-            form_data.append(key, body[key][i])
-            console.log(body[key][i])
-          }
-        } else {
+        if (body[key].name !== "") {
+
           form_data.append(key, body[key])
+        }
+      } else {
+        for (let i = 0; i < body[key].length; i++) {
+          form_data.append(key, body[key][i])
+          console.log(body[key][i])
         }
       }
     } else {
@@ -300,12 +305,18 @@ export const putDataTokenFormData = async <T extends DataResponse>(
 }
 
 export const postDataFormData = async <T extends DataResponse>(url: string, body: any): Promise<HttpResponse<T>> => {
+
   const form_data = new FormData()
+
+  console.log(body)
 
   for (const key in body) {
     if (typeof body[key] === 'object') {
       if (body[key] instanceof File) {
-        form_data.append(key, body[key])
+        if (body[key].name !== "") {
+
+          form_data.append(key, body[key])
+        }
       } else {
         for (let i = 0; i < body[key].length; i++) {
           form_data.append(key, body[key][i])
@@ -317,13 +328,11 @@ export const postDataFormData = async <T extends DataResponse>(url: string, body
     }
   }
 
-  const res: Response = await fetch(`${url}`, {
+  const res: Response = await fetch(`${API_URL}${url}`, {
     method: 'POST',
     body: form_data
   })
-
   const resJson: HttpResponse<T> = await res.json()
-  console.log(resJson)
 
   return resJson
 }

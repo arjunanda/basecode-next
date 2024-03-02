@@ -6,7 +6,7 @@ const ButtonComponent: React.FC<ButtonProps> = ({ isLoading, ...props }) => {
     <div>
       <button
         {...props}
-        className={`bg-cyan-600 hover:bg-cyan-700 p-2 w-full rounded-lg font-semibold uppercase tracking-wide flex justify-center items-center relative ${props.className}`}
+        className={`bg-cyan-600 hover:bg-cyan-700 p-2 w-full rounded-lg font-semibold uppercase tracking-wide flex justify-center items-center relative shadows ${props.className}`}
       >
         {isLoading === true ? (
           <div role="status" className="py-[2px]">

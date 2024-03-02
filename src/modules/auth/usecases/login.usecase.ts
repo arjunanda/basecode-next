@@ -13,6 +13,7 @@ export const LoginCase = async (data: LoginRequest): Promise<ResponseUseCase<Log
   if (loginProses.valid) {
 
     setSessionStorage(LocalStorageConfig.UserData, JSON.stringify(loginProses.data))
+    setSessionStorage(LocalStorageConfig.token, JSON.stringify(loginProses.data.token))
 
     return {
       valid: true,
